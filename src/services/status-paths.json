@@ -1,0 +1,9 @@
+[{
+    "name": "DataDog",
+    "url": "https://api.datadoghq.eu/api/v1/host_name=alerting_engine?api_key=81e88df5df8f6bcda4dde71469aab391&application_key=61661d7c8da9aba6c81bd6981e242bf20f82ec01"
+},
+{
+    "name": "Azure",
+    "url": "https://status.azure.com/en-gb/status"
+}
+]
