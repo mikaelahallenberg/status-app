@@ -30,7 +30,8 @@ const handleResult = async (dispatch, request) => {
 
 export const fetchStatuses = () => async dispatch => {
   const statusService = new StatusService();
-  dispatch(fetchStart("DataDog"), fetchStart("Azure"));
+  dispatch(fetchStart("DataDog"));
+  dispatch(fetchStart("Azure"))
 
   const dataDog = statusService.getStatusFromDatadog();
   const azure = statusService.getStatusFromAzure();
