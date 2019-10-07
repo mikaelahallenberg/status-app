@@ -3,25 +3,43 @@
   import { connect } from "react-redux";
   import StatusComponent from "../components/status-component";
   import fetchStatuses from '../actions/status-action';
+  import styled from 'styled-components';
 
+  const Container = styled.section`
+  display: flex;
+  max-width: 40em;
+  flex-direction: column;
+`;
+  const Wrapper = styled.div`
+  width: 32em;
+  display: flex;
+  justify-content: space-between;
+  `;
+  const Heading = styled.h1`
+  font-size: 1.6em;
+  color: 
+  `;
   class StatusView extends Component {
     componentDidMount() {
       this.props.dispatch(fetchStatuses())
     }
     
     render() {
-
+      console.log(this.props.data)
       return (
-        <div>
-          <h1>Statuses to be displayed</h1>
+        <Container>
+          <Heading>Statuses</Heading>
+          <Wrapper>
           {this.props.data.map((item, i) => {
+            console.log(item, i)
             return <StatusComponent 
               key={i} 
               provider={item.provider}
               pending={item.pending}
               statuses={item.statuses}/>
-          })}
-        </div>
+            })}
+          </Wrapper>
+        </Container>
       );
     }
   }
