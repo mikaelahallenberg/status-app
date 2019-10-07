@@ -4,7 +4,6 @@ export const FETCH_ERROR = "@fetch/error";
 export const FETCH_SUCCESS = "@fetch/success";
 export const FETCH_START = "@fetch/start";
 
-
 const fetchStart = provider => ({
   type: FETCH_START,
   provider: provider
@@ -20,29 +19,24 @@ const fetchSuccess = data => ({
   data
 });
 
-export const fetchStatuses = () => async dispatch => {
-  dispatch(fetchStart("DataDog"));
-  let items = [];
+const handleResult = async (dispatch, request) => {
   try {
-  
-   const statusService = new StatusService()
-    const datadogItems = await statusService.getStatusFromDatadog();
-    items.push(datadogItems)
-    dispatch(fetchSuccess(datadogItems));
+    const items = await request;
+    dispatch(fetchSuccess(items));
   } catch (err) {
     dispatch(fetchError(err));
   }
+};
 
-  dispatch(fetchStart("Azure"))
-  try {
-    const statusService = new StatusService()
-     const azureItems = await statusService.getStatusFromAzure();
-     items.push(azureItems)
-     dispatch(fetchSuccess(azureItems));
-   } catch (err) {
-     dispatch(fetchError(err));
-   }
+export const fetchStatuses = () => async dispatch => {
+  const statusService = new StatusService();
+  dispatch(fetchStart("DataDog"), fetchStart("Azure"));
 
+  const dataDog = statusService.getStatusFromDatadog();
+  const azure = statusService.getStatusFromAzure();
+
+  handleResult(dispatch, dataDog);
+  handleResult(dispatch, azure);
 };
 
 export default fetchStatuses;
