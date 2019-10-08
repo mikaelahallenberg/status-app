@@ -85,7 +85,6 @@ const StatusComponent = data => {
           return (
             <Container key={i}>
               <StatusName>{item.name}:</StatusName>
-
               {item.status ? (
                 <Operational> operational</Operational>
               ) : (
