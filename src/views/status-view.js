@@ -10,7 +10,7 @@
     }
     
     render() {
-
+      //console.log(this.props.data.map(item => item.statuses))
       return (
         <div>
           <h1>Statuses to be displayed</h1>
@@ -50,7 +50,6 @@
   const mapStateToProps = state => ({
     data: state.data,
     error: state.error
-
   });
 
   export default connect(mapStateToProps)(StatusView);

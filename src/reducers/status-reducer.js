@@ -34,10 +34,15 @@ const initialStatus = {
         )
         const updatedData = state.data.map((item, index) => {
           if (index === updatedIndex) {
+          
+            const newStatuses = action.data.statuses // Miksi ei kopioidu? :I
+            console.log(index)
+            console.log(updatedIndex)
+
             return {
               provider: action.data.provider,
               pending: false,
-              statuses: action.data.statuses
+              statuses: newStatuses
             }
           }
           return item;
