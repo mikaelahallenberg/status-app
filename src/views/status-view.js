@@ -22,18 +22,15 @@ color:
 class StatusView extends Component {
   
   componentWillMount() {
-    
     this.props.dispatch(fetchStatuses())
   }
  
   render() {
-    console.log(this.props.data)
     return (
       <Container>
         <Heading>Statuses</Heading>
         <Wrapper>
         {this.props.data.map((item, i) => {
-          console.log(item, i)
           return <StatusComponent 
             key={i} 
             provider={item.provider}
@@ -54,7 +51,7 @@ StatusView.propTypes = {
       statuses: arrayOf(
         shape({
           name: string,
-          status: bool,
+          status: string,
         })
       )
     
@@ -67,10 +64,11 @@ StatusView.defaultProps = {
   data: null
 };
 
-const mapStateToProps = state => ({
-  data: state.data,
-  error: state.error
-
-});
+const mapStateToProps = state => {
+  return {
+    data: state.data,
+    error: state.error
+  };
+}
 
 export default connect(mapStateToProps)(StatusView);

@@ -2,49 +2,50 @@
 class StatusService {
   async getStatusFromDatadog() {
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
     let items = { provider: "DataDog", statuses: [] };
-    await fetch("https://1k6wzpspjf99.statuspage.io/api/v2/summary.json").then(
-      res => {
-        if (res.status !== 200) {
-          throw new Error(`There was a problem, code: ${res.status}`);
-        }
 
-        res.json().then(data =>
-          data.components.filter(item => {
-            return item.id === "s6jxgrkjjj6p" || item.id === "xfqwlt66k1xg"
-              ? items.statuses.push({ name: item.name, status: item.status === 'operational' ? true : false })
-              : null;
-          })
-        );
+    const response = await fetch("https://1k6wzpspjf99.statuspage.io/api/v2/summary.json")
+    if (response.status !== 200) {
+      throw new Error(`There was a problem, code: ${response.status}`);
+    }
+
+    const data = await response.json()
+    
+    data.components.forEach(item => {
+      if (item.id === "s6jxgrkjjj6p" || item.id === "xfqwlt66k1xg") {
+        items.statuses.push({
+          name: item.name,
+          status: item.status
+        })
       }
-    );
+    })
 
-    return items;
+    return items
   }
-  async getStatusFromAzure() {
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+
+  async getStatusFromAzure() {
 
     let items = { provider: "Azure", statuses: [] };
 
-    await fetch("https://1k6wzpspjf99.statuspage.io/api/v2/summary.json").then(
-      res => {
-        if (res.status !== 200) {
-          throw new Error(`There was a problem, code: ${res.status}`);
-        }
+    const response = await fetch("https://1k6wzpspjf99.statuspage.io/api/v2/summary.json")
+    if (response.status !== 200) {
+      throw new Error(`There was a problem, code: ${response.status}`);
+    }
 
-        res.json().then(data =>
-          data.components.filter(item => {
-            return item.id === "s6jxgrkjjj6p" || item.id === "xfqwlt66k1xg"
-            ? items.statuses.push({ name: item.name, status: item.status === 'operational' ? true : false })              
-              : null;
-          })
-        );
+    const data = await response.json()
+    
+    data.components.forEach(item => {
+      if (item.id === "s6jxgrkjjj6p" || item.id === "xfqwlt66k1xg") {
+        items.statuses.push({
+          name: item.name,
+          status: item.status
+        })
       }
-    );
-    return items;
+    })
+
+    return items
+
   }
 }
 
