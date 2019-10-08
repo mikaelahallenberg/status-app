@@ -2,6 +2,8 @@
 class StatusService {
   async getStatusFromDatadog() {
 
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
     let items = { provider: "DataDog", statuses: [] };
     await fetch("https://1k6wzpspjf99.statuspage.io/api/v2/summary.json").then(
       res => {
@@ -22,6 +24,9 @@ class StatusService {
     return items;
   }
   async getStatusFromAzure() {
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     let items = { provider: "Azure", statuses: [] };
 
     await fetch("https://1k6wzpspjf99.statuspage.io/api/v2/summary.json").then(
