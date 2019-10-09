@@ -28,7 +28,7 @@ const handleResult = async (dispatch, request) => {
   }
 };
 
-const getDataInIntervals = m => new Promise(resolve => setTimeout(resolve, m))
+const getDataInIntervals = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
 
 const updateStatus = (dispatch) => {
   const statusService = new StatusService();
