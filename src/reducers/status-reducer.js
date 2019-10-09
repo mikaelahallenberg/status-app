@@ -15,7 +15,6 @@ export default (state = initialStatus, action) => {
         provider: action.provider,
         pending: true,
         statuses: [],
-        updateCount: 0
       };
       const updatedData = state.data.concat(data);
       return {

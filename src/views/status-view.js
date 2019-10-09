@@ -35,8 +35,7 @@ class StatusView extends Component {
             key={i} 
             provider={item.provider}
             pending={item.pending}
-            statuses={item.statuses}
-            updateCount={item.updateCount}/>
+            statuses={item.statuses}/>
           })}
         </Wrapper>
       </Container>
@@ -55,7 +54,6 @@ StatusView.propTypes = {
           status: string,
         })
       ),
-      updateCount: number
     }),
   )
 };
