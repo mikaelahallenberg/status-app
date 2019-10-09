@@ -14,7 +14,7 @@ export default (state = initialStatus, action) => {
       const data = {
         provider: action.provider,
         pending: true,
-        statuses: []
+        statuses: [],
       };
       const updatedData = state.data.concat(data);
       return {
@@ -36,11 +36,10 @@ export default (state = initialStatus, action) => {
       const updatedData = state.data.map((item, index) => {
         if (index === updatedIndex) {
           const newStatuses = action.data.statuses.slice()
-
           return {
             provider: action.data.provider,
             pending: false,
-            statuses: newStatuses
+            statuses: newStatuses,
           };
         }
         return item;

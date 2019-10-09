@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { string, func, shape, arrayOf, object, bool } from "prop-types";
+import { string, func, shape, arrayOf, object, number } from "prop-types";
 import { connect } from "react-redux";
 import StatusComponent from "../components/status-component";
 import fetchStatuses from '../actions/status-action';
@@ -53,8 +53,7 @@ StatusView.propTypes = {
           name: string,
           status: string,
         })
-      )
-    
+      ),
     }),
   )
 };
