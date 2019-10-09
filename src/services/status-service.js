@@ -1,10 +1,11 @@
+import getPath from '../services/path-service';
 
 class StatusService {
-  async getStatusFromDatadog() {
 
+  async getStatusFromDatadog() {
     let items = { provider: "DataDog", statuses: [] };
 
-    const response = await fetch("https://1k6wzpspjf99.statuspage.io/api/v2/summary.json")
+    const response = await fetch(getPath('DataDog'))
     if (response.status !== 200) {
       throw new Error(`There was a problem, code: ${response.status}`);
     }
@@ -28,7 +29,7 @@ class StatusService {
 
     let items = { provider: "Azure", statuses: [] };
 
-    const response = await fetch("https://1k6wzpspjf99.statuspage.io/api/v2/summary.json")
+    const response = await fetch(getPath('Azure'))
     if (response.status !== 200) {
       throw new Error(`There was a problem, code: ${response.status}`);
     }
