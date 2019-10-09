@@ -28,16 +28,25 @@ const handleResult = async (dispatch, request) => {
   }
 };
 
-export const fetchStatuses = () => async dispatch => {
-  const statusService = new StatusService();
-  dispatch(fetchStart("DataDog"));
-  dispatch(fetchStart("Azure"))
+const getDataInIntervals = m => new Promise(resolve => setTimeout(resolve, m))
 
+const updateStatus = (dispatch) => {
+  const statusService = new StatusService();
   const dataDog = statusService.getStatusFromDatadog();
   const azure = statusService.getStatusFromAzure();
-
   handleResult(dispatch, dataDog);
   handleResult(dispatch, azure);
+}
+
+export const fetchStatuses = () => async dispatch => {
+  dispatch(fetchStart("DataDog"));
+  dispatch(fetchStart("Azure"));
+  while(true) {
+    console.log()
+    updateStatus(dispatch);
+    await getDataInIntervals(600000)
+  }
+
 };
 
 export default fetchStatuses;

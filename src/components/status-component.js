@@ -51,16 +51,18 @@ const Operational = styled.span`
 `;
 
 const ServiceDown = styled.span`
-  animation: appearingText 0.6s ease-in;
-  color: #d94514 @keyframes appearingText {
-    0% {
-      color: transparent;
-    }
-    100% {
-      color: #d94514;
-    }
+animation: appearingText 0.6s ease-in;
+color: #d94514;
+@keyframes appearingText {
+  0% {
+    color: transparent;
   }
+  100% {
+    color: #d94514;
+  }
+}
 `;
+
 
 const StatusComponent = data => {
 
@@ -93,6 +95,10 @@ const StatusComponent = data => {
             </Container>
           );
         })}
+      </Container>
+      <Container>
+        <StatusName>
+        </StatusName>
       </Container>
     </Container>
   );
